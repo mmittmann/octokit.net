@@ -64,13 +64,26 @@ namespace Octokit
         /// </summary>
         /// <param name="key">The SSH Key contents</param>
         /// <exception cref="AuthorizationException">Thrown if the client is not authenticated.</exception>
-        /// <returns>A <see cref="User"/></returns>
+        /// <returns>A <see cref="SshKey"/></returns>
         [Obsolete("This method is obsolete. Please use User.Keys.Create(NewPublicKey) instead.")]
         public Task<SshKey> Create(SshKeyUpdate key)
         {
             Ensure.ArgumentNotNull(key, "key");
 
             return ApiConnection.Post<SshKey>(ApiUrls.SshKeys(), key);
+        }
+
+        /// <summary>
+        /// Update the specified <see cref="NewPublicKey"/>.
+        /// </summary>
+        /// <param name="key">The SSH Key contents</param>
+        /// <exception cref="AuthorizationException">Thrown if the client is not authenticated.</exception>
+        /// <returns>A <see cref="PublicKey"/></returns>
+        public Task<PublicKey> Create(NewPublicKey newKey)
+        {
+            Ensure.ArgumentNotNull(newKey, "newKey");
+
+            return ApiConnection.Post<PublicKey>(ApiUrls.Keys(), newKey);
         }
 
         /// <summary>
